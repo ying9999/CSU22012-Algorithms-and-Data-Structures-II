@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class Stops {
     private int stop_id, stop_code;
@@ -6,7 +7,12 @@ public class Stops {
 	public Stops(String input) {
 		String stopInput[] = input.split(",");
 		stop_id = Integer.parseInt(stopInput[0]);
+		try {
 		stop_code = Integer.parseInt(stopInput[1]);
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			stop_code = -1;
+		}
 		stop_name = stopFormat(stopInput[2]);
 		stop_desc = stopInput[3];
 		stop_lat = stopInput[4];
@@ -59,5 +65,11 @@ public class Stops {
 	}
 	public String getStopUrl() {
 		return stop_url;
+	}
+	
+	public String getLine() {
+		String string = null;
+		string = stop_id + ", " + stop_code + ", " + stop_name + ", " + stop_desc + ", " + stop_lat + ", " + stop_lon + ", " + zone_id + ", " + stop_url;
+		return string;
 	}
 }
